@@ -27,19 +27,22 @@ namespace AudicaModding.GunExtras.CustomGunFirepoint
 
         private static void SetFirepoint(GunExtras.GunConfig handConfig, Target.TargetHandType hand)
         {
+            Gun desiredGun = KataConfig.I.GetGun(hand);
+
+            if (desiredGun == null)
+            {
+                MelonLogger.LogError("Can not find gun");
+                return;
+            }
+
             if (handConfig != null && handConfig.firepoint != null)
             {
-
-                Gun desiredGun = KataConfig.I.GetGun(hand);
-
-                if(desiredGun == null)
-                {
-                    MelonLogger.LogError("Can not find gun");
-                    return;
-                }
-
                 desiredGun.firepoint.localPosition = new Vector3(handConfig.firepoint.x, handConfig.firepoint.y, handConfig.firepoint.z);
 
+            }
+            else
+            {
+                desiredGun.firepoint = desiredGun.firepointDefaultPosition;
             }
         }
 
@@ -49,8 +52,11 @@ namespace AudicaModding.GunExtras.CustomGunFirepoint
         {
             private static void Postfix(CustomModelLoader __instance)
             {
+                GunExtras.gunConfig_L = null;
+                GunExtras.gunConfig_R = null;
+
                 string file_l = __instance.GetConfigFilename(CustomModelLoader.CustomModelType.GunLeft);
-                string file_r = __instance.GetConfigFilename(CustomModelLoader.CustomModelType.GunLeft);
+                string file_r = __instance.GetConfigFilename(CustomModelLoader.CustomModelType.GunRight);
                 GunExtras.gunConfig_L = LoadConfig(file_l);
                 GunExtras.gunConfig_R = LoadConfig(file_r);
 
