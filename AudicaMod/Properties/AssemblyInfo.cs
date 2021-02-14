@@ -8,7 +8,7 @@ using AudicaModding.GunExtras;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany(GunExtras.BuildInfo.Company)]
-[assembly: AssemblyProduct(GunExtras.BuildInfo.Name)]
+[assembly: AssemblyProduct("GunExtras")]
 [assembly: AssemblyCopyright("Created by " + GunExtras.BuildInfo.Author)]
 [assembly: AssemblyTrademark(GunExtras.BuildInfo.Company)]
 [assembly: AssemblyCulture("")]
